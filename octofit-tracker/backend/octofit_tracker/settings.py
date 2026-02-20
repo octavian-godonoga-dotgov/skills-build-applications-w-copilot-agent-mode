@@ -27,7 +27,14 @@ DEBUG = True
 
 
 # Allow all hosts for development
-ALLOWED_HOSTS = ['*']
+import os
+codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    f'{codespace_name}-8000.app.github.dev',
+    codespace_name
+]
 
 
 # Application definition
@@ -89,10 +96,7 @@ DATABASES = {
         'CLIENT': {
             'host': 'localhost',
             'port': 27017,
-            'username': '',
-            'password': '',
             'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-1',
         },
     }
 }
